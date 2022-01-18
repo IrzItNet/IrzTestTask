@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Xml;
+using IncomingService.XmlEntitiesChecker;
 
 namespace IncomingService.Controllers
 {
@@ -37,18 +38,5 @@ namespace IncomingService.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "На сервере произошла ошибка.\n" + exception.Message);
             }
         }
-    }
-
-    public interface IXmlEntitiesChecker
-    {
-        bool Check(XmlDocument xmlDocument);
-    }
-
-    public class FakeXmlEntitiesChecker : IXmlEntitiesChecker
-    {
-        private Random random = new Random();
-
-        public bool Check(XmlDocument xmlDocument) =>
-            random.NextDouble() > 0.25;
     }
 }
